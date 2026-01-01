@@ -1,31 +1,39 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8080/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "http://localhost:8080/auth/login",
+        { email, password }
+      );
 
-      console.log(response.data);
-      alert("Login successful");
-    } catch (error) {
-      console.error("LOGIN ERROR:", error);
+      login(res.data);
 
-      if (error.response) {
-        console.error("Status:", error.response.status);
-        console.error("Data:", error.response.data);
-        alert("Login failed: " + error.response.status);
+      // 🔀 Redirect by role
+      if (res.data.roles.includes("ROLE_ADMIN")) {
+        navigate("/admin");
+      } else if (res.data.roles.includes("ROLE_HR")) {
+        navigate("/hr");
+      } else if (res.data.roles.includes("ROLE_MANAGER")) {
+        navigate("/manager");
       } else {
-        alert("Network / CORS error");
+        navigate("/employee");
       }
+
+    // eslint-disable-next-line no-unused-vars
+    } catch (err) {
+      alert("Invalid email or password");
     }
   };
 
