@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import HomeRedirect from "./routes/HomeRedirect";
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import HrDashboard from "./pages/hr/HrDashboard";
@@ -11,6 +12,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        
+        <Route path="/" element={<HomeRedirect />} />
 
         <Route path="/login" element={<Login />} />
 

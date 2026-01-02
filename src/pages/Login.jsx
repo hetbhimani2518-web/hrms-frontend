@@ -1,26 +1,23 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import api from "../api/axios";
+
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
-
+  
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "http://localhost:8080/auth/login",
-        { email, password }
-      );
+       const res = await api.post("/auth/login", {email,password});
 
       login(res.data);
-
-      // 🔀 Redirect by role
+      
       if (res.data.roles.includes("ROLE_ADMIN")) {
         navigate("/admin");
       } else if (res.data.roles.includes("ROLE_HR")) {
