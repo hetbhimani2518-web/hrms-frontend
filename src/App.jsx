@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import HomeRedirect from "./routes/HomeRedirect";
@@ -10,7 +10,7 @@ import EmployeeDashboard from "./pages/employee/EmployeeDashboard";
 
 function App() {
   return (
-    <BrowserRouter>
+    
       <Routes>
         
         <Route path="/" element={<HomeRedirect />} />
@@ -54,7 +54,6 @@ function App() {
         />
 
       </Routes>
-    </BrowserRouter>
   );
 }
 

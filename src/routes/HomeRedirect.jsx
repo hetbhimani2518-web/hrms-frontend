@@ -4,7 +4,7 @@ import { useAuth } from "../auth/AuthContext";
 const HomeRedirect = () => {
   const { auth } = useAuth();
 
-  if (!auth) {
+  if (!auth || !auth.roles) {
     return <Navigate to="/login" replace />;
   }
 
