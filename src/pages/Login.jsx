@@ -10,7 +10,7 @@ import {
   EyeIcon,
   EyeOffIcon,
   CheckIcon,
-  ErrorIcon
+  ErrorIcon,
 } from "../components/Icons";
 
 function Login() {
@@ -22,9 +22,6 @@ function Login() {
 
   const navigate = useNavigate();
   const { login } = useAuth();
-  
-  const emailValid = email.includes("@");
-  const passwordValid = password.length >= 20;
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -57,86 +54,62 @@ function Login() {
 
   return (
     <div className="login-page">
+      <div className="login-container">        
 
-      <div className="login-left">
-        <div>
-          <h1>HRMS</h1>
-          <p>Human Resource Management System</p>
+        <div className="login-left">
+          <div className="login-left-content">
+            <h1>HRMS Portal</h1>
+            <p>Manage employees, roles & growth securely</p>
+          </div>
         </div>
-        <p>Secure access to your organization</p>
-        <p>© 2025 HRMS</p>
-      </div>
 
-      <div className="login-right">
-        <div className="login-card">
+        <div className="login-right">
+          <div className="login-card">
+            <h2>Welcome Back!</h2>
+            <p>Sign in To Continue</p>
 
-          <h2>Welcome Back</h2>
-          <p>Login to continue</p>
+            {error && <div className="error-text">{error}</div>}
 
-          {error && <div className="error-text">{error}</div>}
-
-          <form onSubmit={handleLogin}>
-
-            <div className="field-group">
-              <label className="field-label">
-                <MailIcon className="icon" /> Email
-              </label>
-
-              <div className="input-wrapper">
+            <form onSubmit={handleLogin}>
+              <div className="field-group">
+                <label className="field-label">Email</label>
                 <input
-                  type="email"
                   className="field-input"
+                  type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={loading}
+                  required
                 />
-
-                {email && (
-                  <span className={`validation-icon ${emailValid ? "success" : "error"}`}>
-                    {emailValid ? <CheckIcon className="icon" /> : <ErrorIcon className="icon" />}
-                  </span>
-                )}
               </div>
-            </div>
 
-            <div className="field-group">
-              <label className="field-label">
-                <LockIcon className="icon" /> Password
-              </label>
+              <div className="field-group">
+                <label className="field-label">Password</label>
 
-              <div className="input-wrapper">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className="field-input"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  disabled={loading}
-                />
+                <div className="input-wrapper">
+                  <input
+                    className="field-input"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={loading}
+                    required
+                  />
 
-                {password && (
-                  <span className={`validation-icon ${passwordValid ? "success" : "error"}`}>
-                    {passwordValid ? <CheckIcon className="icon" /> : <ErrorIcon className="icon" />}
+                  <span
+                    className="toggle-password"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOffIcon /> : <EyeIcon />}
                   </span>
-                )}
-
-                <span
-                  className="toggle-password"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOffIcon className="icon eye-animate rotate" />
-                  ) : (
-                    <EyeIcon className="icon eye-animate" />
-                  )}
-                </span>
+                </div>
               </div>
-            </div>
 
-            <button className="login-button" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
-            </button>
-
-          </form>
+              <button className="login-button" disabled={loading}>
+                {loading ? "Signing in..." : "Sign in"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
