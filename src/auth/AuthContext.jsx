@@ -1,5 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from "react";
+import api from "../api/api";
 
 const AuthContext = createContext();
 
@@ -9,14 +9,20 @@ export const AuthProvider = ({ children }) => {
     return stored ? JSON.parse(stored) : null;
   });
 
-  const login = (data) => {
-    setAuth(data);
-    localStorage.setItem("auth", JSON.stringify(data));
+  const login = async (email , password) => {
+    const response = await api.post("/auth/login", { email, password });
+
+    const {accessToken, refreshToken , role } = response.data;
+
+    const authData = { accessToken, refreshToken , role };
+
+    localStorage.setItem("auth", JSON.stringify(authData));
+    setAuth(authData);
   };
 
-  const logout = () => {
-    setAuth(null);
+  const logout = async () => {
     localStorage.removeItem("auth");
+    setAuth(null);
   };
 
   return (
@@ -26,4 +32,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);
