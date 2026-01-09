@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { createHr } from "../../api/hrApi";
 
-function HrCreateModal({ onSuccess }) {
+function HrCreateModal({ onClose, onCreate }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -9,55 +8,39 @@ function HrCreateModal({ onSuccess }) {
     phone: "",
     department: "",
     designation: "",
-    joiningDate: "",
+    joiningDate: ""
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const handleChange = (e) => {
+  const handleChange = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-    e.loading(true);
-    setError("");
-    try {
-      await createHr(form);
-      onSuccess();
-      setForm({
-        email: "",
-        password: "",
-        fullName: "",
-        phone: "",
-        department: "",
-        designation: "",
-        joiningDate: "",
-      });
-    } catch (err) {
-      setError(err.response?.data?.message || "Failed to create HR");
-    } finally {
-      setLoading(false);
-    }
+    onCreate(form);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {error && <p className="error">{error}</p>}
+    <div className="modal-overlay">
+      <div className="modal">
+        <h3>Add HR</h3>
 
-      <input name="email" placeholder="Email" onChange={handleChange} />
-      <input name="password" placeholder="Password" type="password" onChange={handleChange} />
-      <input name="fullName" placeholder="Full Name" onChange={handleChange} />
-      <input name="phone" placeholder="Phone" onChange={handleChange} />
-      <input name="department" placeholder="Department" onChange={handleChange} />
-      <input name="designation" placeholder="Designation" onChange={handleChange} />
-      <input name="joiningDate" type="date" onChange={handleChange} />
+        <form onSubmit={handleSubmit}>
+          <input name="fullName" placeholder="Full Name" onChange={handleChange} required />
+          <input name="email" placeholder="Email" onChange={handleChange} required />
+          <input name="password" placeholder="Password" onChange={handleChange} required />
+          <input name="phone" placeholder="Phone" onChange={handleChange} />
+          <input name="department" placeholder="Department" onChange={handleChange} />
+          <input name="designation" placeholder="Designation" onChange={handleChange} />
+          <input type="date" name="joiningDate" onChange={handleChange} />
 
-      <button type="submit" disabled={loading}>
-        {loading ? "Creating..." : "Create HR"}
-      </button>
-    </form>
+          <div className="modal-actions">
+            <button type="submit">Create</button>
+            <button type="button" onClick={onClose}>Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }
 
