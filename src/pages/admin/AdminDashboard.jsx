@@ -1,37 +1,31 @@
-import { useEffect, useState } from "react";
-import { fetchAdminStats } from "../../services/adminStatsService";
+import "../../styles/admin.css";
 
 function AdminDashboard() {
-  const [stats, setStats] = useState(null);
-
-  useEffect(() => {
-    fetchAdminStats().then(setStats);
-  }, []);
-
-  if (!stats) return <p>Loading dashboard...</p>;
-
   return (
-    <>
-      <h2>Dashboard Overview</h2>
-      <p style={{ opacity: 0.8, marginBottom: "20px" }}>
-        Welcome back, Admin
-      </p>
+    <div>
+      <h2>Admin Dashboard</h2>
 
       <div className="stats-grid">
-        <StatCard title="Total Employees" value={stats.totalEmployees} />
-        <StatCard title="Departments" value={stats.departments} />
-        <StatCard title="Pending Leaves" value={stats.pendingLeaves} />
-        <StatCard title="Active HR" value={stats.activeHr} />
-      </div>
-    </>
-  );
-}
+        <div className="stat-card">
+          <h3>Total HRs</h3>
+          <p>—</p>
+        </div>
 
-function StatCard({ title, value }) {
-  return (
-    <div className="stat-card">
-      <h3>{title}</h3>
-      <p>{value}</p>
+        <div className="stat-card">
+          <h3>Total Employees</h3>
+          <p>—</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>Active Users</h3>
+          <p>—</p>
+        </div>
+
+        <div className="stat-card">
+          <h3>System Status</h3>
+          <p>Running</p>
+        </div>
+      </div>
     </div>
   );
 }

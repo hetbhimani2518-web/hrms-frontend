@@ -1,13 +1,10 @@
 /* eslint-disable react-hooks/immutability */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  getAllHrs,
-  deleteHr,
-  disableHr
-} from "../../api/hrService";
+import { getAllHrs, deleteHr} from "../../../api/hrService";
+// import { getAllHrs, deleteHr, toggleHrStatus } from "../../api/hrService";
 
-export default function HrManagement() {
+export default function HrList() {
   const [hrs, setHrs] = useState([]);
   const navigate = useNavigate();
 
@@ -17,30 +14,30 @@ export default function HrManagement() {
 
   const loadHrs = async () => {
     const res = await getAllHrs();
-    setHrs(res.data); 
+    setHrs(res.data);
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Delete HR?")) {
+    if (window.confirm("Delete this HR?")) {
       await deleteHr(id);
       loadHrs();
     }
   };
 
-  const handleDisable = async (id) => {
-    await disableHr(id);
-    loadHrs();
-  };
+  // const handleStatus = async (id) => {
+  //   await toggleHrStatus(id);
+  //   loadHrs();
+  // };
 
   return (
     <div>
       <h2>HR Management</h2>
 
-      <button onClick={() => navigate("/admin/hr/create")}>
+      <button onClick={() => navigate("/admin/hr")}>
         + Add HR
       </button>
 
-      <table border="1">
+      <table border="1" cellPadding="8">
         <thead>
           <tr>
             <th>Email</th>
@@ -65,11 +62,11 @@ export default function HrManagement() {
               <td>{hr.joiningDate}</td>
               <td>{hr.status}</td>
               <td>
+                {/* <button onClick={() => handleStatus(hr.id)}>
+                  Toggle
+                </button> */}
                 <button onClick={() => navigate(`/admin/hr/edit/${hr.id}`)}>
                   Edit
-                </button>
-                <button onClick={() => handleDisable(hr.id)}>
-                  Disable
                 </button>
                 <button onClick={() => handleDelete(hr.id)}>
                   Delete

@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { createHr } from "../../../api/hrService";
 
-function HrCreateModal({ onClose, onCreate }) {
+function HrCreateModal( ) {
+  
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -15,9 +19,10 @@ function HrCreateModal({ onClose, onCreate }) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onCreate(form);
+    await createHr(form);
+    navigate("/admin/hr");
   };
 
   return (
@@ -26,17 +31,16 @@ function HrCreateModal({ onClose, onCreate }) {
         <h3>Add HR</h3>
 
         <form onSubmit={handleSubmit}>
-          <input name="fullName" placeholder="Full Name" onChange={handleChange} required />
           <input name="email" placeholder="Email" onChange={handleChange} required />
           <input name="password" placeholder="Password" onChange={handleChange} required />
+          <input name="fullName" placeholder="Full Name" onChange={handleChange} required />
           <input name="phone" placeholder="Phone" onChange={handleChange} />
           <input name="department" placeholder="Department" onChange={handleChange} />
           <input name="designation" placeholder="Designation" onChange={handleChange} />
           <input type="date" name="joiningDate" onChange={handleChange} />
 
           <div className="modal-actions">
-            <button type="submit">Create</button>
-            <button type="button" onClick={onClose}>Cancel</button>
+            <button type="submit">Create</button>            
           </div>
         </form>
       </div>

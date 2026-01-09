@@ -1,6 +1,6 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
-import axios from "axios";
+import api from "../../api/axios";
 import "../../styles/admin.css";
 
 function AdminLayout() {
@@ -9,9 +9,11 @@ function AdminLayout() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:8080/auth/logout", {
-        refreshToken: auth.refreshToken,
-      });
+      if (auth?.refreshToken) {
+        await api.post("/auth/logout", {
+          refreshToken: auth.refreshToken,
+        });
+      }
     } catch (e) {
       console.error("Logout failed", e);
     } finally {
@@ -27,11 +29,11 @@ function AdminLayout() {
         <button onClick={handleLogout}>Logout</button>
       </div>
 
-      <div className="admin-body">
+      <div className="admin-body">        
         <div className="admin-sidebar">
           <ul>
             <li>
-              <NavLink to="/admin/dashboard" className="nav-link">
+              <NavLink to="/admin" end className="nav-link">
                 📊 <span>Dashboard</span>
               </NavLink>
             </li>
@@ -49,7 +51,7 @@ function AdminLayout() {
             </li>
           </ul>
         </div>
-
+      
         <div className="admin-content">
           <Outlet />
         </div>
