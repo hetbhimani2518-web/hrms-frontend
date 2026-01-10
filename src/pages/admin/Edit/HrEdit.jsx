@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getHrById, updateHr } from "../../../api/hrService";
+import "../../../styles/hr.css";
+
 
 export default function HrEdit() {
   const { id } = useParams();
@@ -35,19 +37,68 @@ export default function HrEdit() {
   };
 
   return (
-    <div>
-      <h2>Edit HR</h2>
+    // <div>
+    //   <h2>Edit HR</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input name="email" value={form.email} onChange={handleChange} />
-        <input name="name" value={form.fullName} onChange={handleChange} />
-        <input name="phone" value={form.phone} onChange={handleChange} />
-        <input name="department" value={form.department} onChange={handleChange} />
-        <input name="designation" value={form.designation} onChange={handleChange} />
-        <input name="joiningDate" value={form.joiningDate} onChange={handleChange} />
+    //   <form onSubmit={handleSubmit}>
+    //     <input name="email" value={form.email} onChange={handleChange} />
+    //     <input name="name" value={form.fullName} onChange={handleChange} />
+    //     <input name="phone" value={form.phone} onChange={handleChange} />
+    //     <input name="department" value={form.department} onChange={handleChange} />
+    //     <input name="designation" value={form.designation} onChange={handleChange} />
+    //     <input name="joiningDate" value={form.joiningDate} onChange={handleChange} />
 
-        <button type="submit">Update</button>
-      </form>
-    </div>
+    //     <button type="submit">Update</button>
+    //   </form>
+    // </div>
+<div className="form-wrapper">
+
+    <div className="form-card">
+        <h3>Edit HR</h3>
+
+        <form onSubmit={handleSubmit} className="form-grid">
+          <input
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+          />
+          <input
+            name="fullName"
+            placeholder="Full Name"
+            value={form.fullName}
+            onChange={handleChange}
+          />
+          <input
+            name="phone"
+            placeholder="Phone"
+            value={form.phone}
+            onChange={handleChange}
+          />
+          <input
+            name="department"
+            placeholder="Department"
+            value={form.department}
+            onChange={handleChange}
+          />
+          <input
+            name="designation"
+            placeholder="Designation"
+            value={form.designation}
+            onChange={handleChange}
+          />
+          <input
+            type="date"
+            name="joiningDate"
+            value={form.joiningDate || ""}
+            onChange={handleChange}
+          />
+
+          <button className="primary-btn">
+            Edit HR
+          </button>
+        </form>
+      </div>
+      </div>
   );
 }

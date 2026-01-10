@@ -1,11 +1,36 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import api from "../../api/axios";
+import { useEffect, useState } from "react";
+import {
+  LayoutDashboard,
+  Users,
+  UserCog,
+  Menu,
+} from "lucide-react";
 import "../../styles/admin.css";
 
 function AdminLayout() {
   const { auth, logout } = useAuth();
   const navigate = useNavigate();
+
+  const [collapsed, setCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setCollapsed(true);
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -23,38 +48,58 @@ function AdminLayout() {
   };
 
   return (
-    <div className="admin-page">
-      <div className="admin-navbar">
-        <h2>HRMS Admin</h2>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
-
-      <div className="admin-body">        
-        <div className="admin-sidebar">
-          <ul>
-            <li>
-              <NavLink to="/admin" end className="nav-link">
-                📊 <span>Dashboard</span>
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink to="/admin/hr" className="nav-link">
-                👥 <span>HR Management</span>
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink to="/admin/employees" className="nav-link">
-                🧑‍💼 <span>Employees</span>
-              </NavLink>
-            </li>
-          </ul>
+    <div
+      className={`admin-layout ${
+        collapsed ? "sidebar-collapsed" : ""
+      }`}
+    >
+      <header className="admin-header">
+        <div className="header-left">
+          <button
+            className="collapse-btn"
+            onClick={() => setCollapsed(!collapsed)}
+          >
+            <Menu size={18} />
+          </button>
+          <h2>HRMS Admin</h2>
         </div>
-      
-        <div className="admin-content">
+
+        <button className="logout-btn" onClick={handleLogout}>
+          Logout
+        </button>
+      </header>
+
+      <div className="admin-main">
+        <aside
+          className="admin-sidebar"
+          onMouseEnter={() => collapsed && !isMobile && setCollapsed(false)}
+          onMouseLeave={() => !isMobile && setCollapsed(true)}
+        >
+          <NavLink to="/admin" end className="side-link">
+            <span className="link-icon">
+              <LayoutDashboard size={20} />
+            </span>
+            <span className="link-text">Dashboard</span>
+          </NavLink>
+
+          <NavLink to="/admin/hr" className="side-link">
+            <span className="link-icon">
+              <UserCog size={20} />
+            </span>
+            <span className="link-text">HR Management</span>
+          </NavLink>
+
+          <NavLink to="/admin/employees" className="side-link">
+            <span className="link-icon">
+              <Users size={20} />
+            </span>
+            <span className="link-text">Employees</span>
+          </NavLink>
+        </aside>
+
+        <section className="admin-content">
           <Outlet />
-        </div>
+        </section>
       </div>
     </div>
   );
