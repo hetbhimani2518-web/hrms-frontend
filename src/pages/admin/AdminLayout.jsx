@@ -89,12 +89,6 @@ function AdminLayout() {
             <span className="link-text">HR Management</span>
           </NavLink>
 
-          <NavLink to="/admin/employees" className="side-link">
-            <span className="link-icon">
-              <Users size={20} />
-            </span>
-            <span className="link-text">Employees</span>
-          </NavLink>
         </aside>
 
         <section className="admin-content">

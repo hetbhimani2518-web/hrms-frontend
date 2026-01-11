@@ -9,8 +9,6 @@ import HrCreate from "./pages/admin/Create/HrCreate";
 import HrEdit from "./pages/admin/Edit/HrEdit";
 
 import HrDashboard from "./pages/hr/HrDashboard";
-import ManagerDashboard from "./pages/manager/ManagerDashboard";
-import EmployeeDashboard from "./pages/employee/EmployeeDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 
 function App() {
@@ -39,24 +37,6 @@ function App() {
           element={
             <ProtectedRoute allowedRoles={["ROLE_HR"]}>
               <HrDashboard />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/manager"
-          element={
-            <ProtectedRoute allowedRoles={["ROLE_MANAGER"]}>
-              <ManagerDashboard />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/employee"
-          element={
-            <ProtectedRoute allowedRoles={["ROLE_EMPLOYEE"]}>
-              <EmployeeDashboard />
             </ProtectedRoute>
           }
         />
