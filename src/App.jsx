@@ -4,16 +4,19 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import HomeRedirect from "./routes/HomeRedirect";
 
 import AdminLayout from "./pages/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
 import HrManagement from "./pages/admin/HrManagement";
 import ManagerManagement from "./pages/admin/ManagerManagement";
+
 import HrCreate from "./pages/admin/Create/HrCreate";
 import ManagerCreate from "./pages/admin/Create/ManagerCreate";
+
 import HrEdit from "./pages/admin/Edit/HrEdit";
 import ManagerEdit from "./pages/admin/Edit/ManagerEdit";
 
 import HrDashboard from "./pages/hr/HrDashboard";
 import ManagerDashboard from "./pages/manager/ManagerDashboard";
-import AdminDashboard from "./pages/admin/AdminDashboard";
 
 function App() {
   return (

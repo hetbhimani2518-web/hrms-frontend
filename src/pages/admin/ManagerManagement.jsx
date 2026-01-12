@@ -131,7 +131,7 @@ export default function ManagerManagement() {
                   <td className="actions-cell">
                     <button
                       className="btn btn-outline"
-                      onClick={() => navigate(`/admin/hr/edit/${manager.id}`)}
+                      onClick={() => navigate(`/admin/manager/edit/${manager.id}`)}
                     >
                       Edit
                     </button>

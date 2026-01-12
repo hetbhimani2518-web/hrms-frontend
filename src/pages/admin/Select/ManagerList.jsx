@@ -1,10 +1,7 @@
 /* eslint-disable react-hooks/immutability */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  getAllManagers,
-  deleteManager,
-} from "../../../api/AdminServices/managerService";
+import { getAllManagers ,deleteManager,} from "../../../api/AdminServices/managerService";
 
 export default function ManagerList() {
   const [managers, setManagers] = useState([]);
@@ -26,59 +23,7 @@ export default function ManagerList() {
     }
   };
 
-  // const handleStatus = async (id) => {
-  //   await toggleHrStatus(id);
-  //   loadHrs();
-  // };
-
-  return (
-    // <div>
-    //   <h2>HR Management</h2>
-
-    //   <button onClick={() => navigate("/admin/hr/create")}>
-    //     + Add HR
-    //   </button>
-
-    //   <table border="1" cellPadding="8">
-    //     <thead>
-    //       <tr>
-    //         <th>Email</th>
-    //         <th>Name</th>
-    //         <th>Department</th>
-    //         <th>Designation</th>
-    //         <th>Phone</th>
-    //         <th>Joining Date</th>
-    //         <th>Status</th>
-    //         <th>Actions</th>
-    //       </tr>
-    //     </thead>
-
-    //     <tbody>
-    //       {hrs.map((hr) => (
-    //         <tr key={hr.id}>
-    //           <td>{hr.email}</td>
-    //           <td>{hr.fullName}</td>
-    //           <td>{hr.department}</td>
-    //           <td>{hr.designation}</td>
-    //           <td>{hr.phone}</td>
-    //           <td>{hr.joiningDate}</td>
-    //           <td>{hr.status}</td>
-    //           <td>
-    //             {/* <button onClick={() => handleStatus(hr.id)}>
-    //               Toggle
-    //             </button> */}
-    //             <button onClick={() => navigate(`/admin/hr/edit/${hr.id}`)}>
-    //               Edit
-    //             </button>
-    //             <button onClick={() => handleDelete(hr.id)}>
-    //               Delete
-    //             </button>
-    //           </td>
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-    // </div>
+  return (    
 
     <div className="manager-page">
       <div className="manager-header">
@@ -109,16 +54,29 @@ export default function ManagerList() {
               <td>{manager.email}</td>
               <td>{manager.department}</td>
               <td>
-                <span className={`status ${manager.status.toLowerCase()}`}>
+                <span
+                  className={`status-badge ${
+                    manager.status === "ACTIVE"
+                      ? "status-active"
+                      : manager.status === "DISABLED"
+                      ? "status-disabled"
+                      : "status-inactive"
+                  }`}
+                >
                   {manager.status}
                 </span>
               </td>
               <td className="actions">
-                <button onClick={() => navigate(`/admin/manager/edit/${manager.id}`)}>
+                <button
+                  onClick={() => navigate(`/admin/manager/edit/${manager.id}`)}
+                >
                   Edit
                 </button>
                 {/* <button onClick={() => handleDisable(hr.id)}>Disable</button> */}
-                <button className="danger" onClick={() => handleDelete(manager.id)}>
+                <button
+                  className="danger"
+                  onClick={() => handleDelete(manager.id)}
+                >
                   Delete
                 </button>
               </td>
