@@ -1,0 +1,311 @@
+/* =========================
+   MANAGER PAGE BASE
+========================= */
+.manager-page {
+  min-height: 100vh;
+  padding: 40px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #e5e7eb;
+}
+
+/* =========================
+   CARD CONTAINER
+========================= */
+.manager-card {
+  width: 100%;
+  max-width: 1200px;
+  background: linear-gradient(135deg, #020617 0%, #020617 40%, #030712 100%);
+  border-radius: 18px;
+  padding: 26px 28px 30px;
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow:
+    0 24px 60px rgba(15, 23, 42, 0.9),
+    0 0 0 1px rgba(148, 163, 184, 0.08);
+}
+
+/* =========================
+   HEADER
+========================= */
+.manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.manager-title,
+.manager-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #f9fafb;
+  letter-spacing: 0.03em;
+}
+
+/* =========================
+   TABLE WRAPPER
+========================= */
+.table-wrapper {
+  margin-top: 10px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  background: radial-gradient(
+    circle at top,
+    #020617 0%,
+    #030712 55%,
+    #020617 100%
+  );
+}
+
+/* =========================
+   MANAGER TABLE
+========================= */
+.manager-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.manager-table thead {
+  background: linear-gradient(135deg, #111827, #020617);
+}
+
+.manager-table th,
+.manager-table td {
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.manager-table th {
+  font-weight: 600;
+  color: #e5e7eb;
+  border-bottom: 1px solid rgba(75, 85, 99, 0.9);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.manager-table tbody tr {
+  border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.06s ease;
+}
+
+.manager-table tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.44);
+}
+
+.manager-table tbody tr:nth-child(odd) {
+  background: rgba(15, 23, 42, 0.72);
+}
+
+.manager-table tbody tr:hover {
+  background: rgba(6, 182, 212, 0.18); /* teal hover */
+  box-shadow: inset 0 0 0 1px rgba(6, 182, 212, 0.4);
+}
+
+.manager-table td {
+  color: #e5e7eb;
+}
+
+/* =========================
+   STATUS BADGES
+========================= */
+.status,
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status.active,
+.status-active {
+  background: rgba(16, 185, 129, 0.16);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.7);
+}
+
+.status.disabled,
+.status-inactive {
+  background: rgba(148, 163, 184, 0.12);
+  color: #cbd5f5;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+}
+
+/* =========================
+   ACTIONS
+========================= */
+.actions,
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.actions-col {
+  text-align: right;
+  width: 240px;
+}
+
+/* =========================
+   BUTTONS (MATCH HR)
+========================= */
+.btn,
+.actions button {
+  border: none;
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.btn:active,
+.actions button:active {
+  transform: scale(0.97);
+}
+
+.btn-primary,
+.primary-btn {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: #f9fafb;
+  box-shadow:
+    0 12px 30px rgba(37, 99, 235, 0.45),
+    0 0 0 1px rgba(191, 219, 254, 0.3);
+}
+
+.btn-primary:hover,
+.primary-btn:hover {
+  background: linear-gradient(135deg, #1d4ed8, #4338ca);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+}
+
+.btn-outline:hover {
+  background: rgba(31, 41, 55, 0.8);
+}
+
+.btn-warning {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.5);
+}
+
+.btn-warning:hover {
+  background: rgba(251, 191, 36, 0.18);
+}
+
+.btn-danger,
+.actions .danger {
+  background: rgba(239, 68, 68, 0.16);
+  color: #fca5a5;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+}
+
+.btn-danger:hover,
+.actions .danger:hover {
+  background: rgba(239, 68, 68, 0.22);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+.empty-row {
+  text-align: center;
+  padding: 26px 0;
+  color: #9ca3af;
+}
+
+/* =========================
+   FORMS (CREATE / EDIT)
+========================= */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 460px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.form-card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.form-grid input {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+.form-grid input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.form-grid input:focus {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .manager-card {
+    padding: 18px 16px 22px;
+  }
+
+  .manager-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .actions-cell {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .actions-col {
+    width: 180px;
+  }
+}

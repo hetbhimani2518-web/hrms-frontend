@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createHr } from "../../../api/AdminServices/hrService";
-import "../../../styles/hr.css";
+import { createManager } from "../../../api/AdminServices/managerService";
+import "../../../styles/admin.css";
 
-function HrCreate() {
+function ManagerCreate() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
@@ -22,10 +22,10 @@ function HrCreate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createHr(form);
-      navigate("/admin/hr");
+      await createManager(form);
+      navigate("/admin/manager");
     } catch (e) {
-      alert(e.response?.data?.message || "Failed to create HR");
+      alert(e.response?.data?.message || "Failed to create Manager");
     }
   };
 
@@ -73,7 +73,7 @@ function HrCreate() {
       </div> */}
 
       <div className="form-card">
-        <h3>Create HR</h3>
+        <h3>Create Manager</h3>
 
         <form onSubmit={handleSubmit} className="form-grid">
           <input
@@ -120,7 +120,7 @@ function HrCreate() {
           />
 
           <button className="primary-btn">
-            Create HR
+            Create Manager
           </button>
         </form>
       </div>
@@ -128,4 +128,4 @@ function HrCreate() {
   );
 }
 
-export default HrCreate;
+export default ManagerCreate;

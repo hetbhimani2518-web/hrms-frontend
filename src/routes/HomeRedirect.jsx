@@ -21,6 +21,7 @@ import { useAuth } from "../auth/AuthContext";
 const roleRedirectMap = {
   ROLE_ADMIN: "/admin",
   ROLE_HR: "/hr",
+  ROLE_MANAGER: "/manager",
 };
 
 const HomeRedirect = () => {

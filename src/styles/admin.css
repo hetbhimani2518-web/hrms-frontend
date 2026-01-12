@@ -215,6 +215,7 @@
 
 /* Accent borders */
 .stat-card.blue   { box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.4); }
+.stat-card.tyle   { box-shadow: inset 0 0 0 1px rgba(6, 182, 212, 0.4);}
 .stat-card.green  { box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.4); }
 .stat-card.purple { box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.4); }
 .stat-card.orange { box-shadow: inset 0 0 0 1px rgba(234, 88, 12, 0.4); }
@@ -234,6 +235,7 @@
 }
 
 .stat-icon.blue   { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+.stat-icon.tyle   { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
 .stat-icon.green  { background: linear-gradient(135deg, #16a34a, #22c55e); }
 .stat-icon.purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
 .stat-icon.orange { background: linear-gradient(135deg, #ea580c, #f97316); }

@@ -1,4 +1,4 @@
-import api from "./axios";
+import api from "../axios";
 
 export const createHr = (data) =>
   api.post("/admin/hr/create", data);

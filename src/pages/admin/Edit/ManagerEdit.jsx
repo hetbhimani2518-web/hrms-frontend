@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getHrById, updateHr } from "../../../api/AdminServices/hrService";
-import "../../../styles/hr.css";
+import {
+  getManagerById,
+  updateManager,
+} from "../../../api/AdminServices/managerService";
+import "../../../styles/manager.css";
 
-
-export default function HrEdit() {
+export default function ManagerEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -15,15 +17,15 @@ export default function HrEdit() {
     phone: "",
     department: "",
     designation: "",
-    joiningDate: ""
+    joiningDate: "",
   });
 
   useEffect(() => {
-    loadHr();
+    loadManager();
   }, []);
 
-  const loadHr = async () => {
-    const res = await getHrById(id);
+  const loadManager = async () => {
+    const res = await getManagerById(id);
     setForm(res.data);
   };
 
@@ -32,8 +34,8 @@ export default function HrEdit() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateHr(id, form);
-    navigate("/admin/hr");
+    await updateManager(id, form);
+    navigate("/admin/manager");
   };
 
   return (
@@ -51,10 +53,9 @@ export default function HrEdit() {
     //     <button type="submit">Update</button>
     //   </form>
     // </div>
-<div className="form-wrapper">
-
-    <div className="form-card">
-        <h3>Edit HR</h3>
+    <div className="form-wrapper">
+      <div className="form-card">
+        <h3>Edit Manager</h3>
 
         <form onSubmit={handleSubmit} className="form-grid">
           <input
@@ -94,11 +95,9 @@ export default function HrEdit() {
             onChange={handleChange}
           />
 
-          <button className="primary-btn">
-            Edit HR
-          </button>
+          <button className="primary-btn">Edit MANAGER</button>
         </form>
       </div>
-      </div>
+    </div>
   );
 }

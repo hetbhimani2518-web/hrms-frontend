@@ -47,6 +47,14 @@ function AdminDashboard() {
           <h4>Total HRs</h4>
           <Counter end={12} />
         </div>
+
+        <div className="stat-card tyle">
+          <div className="stat-icon tyle">
+            <Users size={22} />
+          </div>
+          <h4>Total MANAGERs</h4>
+          <Counter end={12} />
+        </div>
       
         <div className="stat-card green">
           <div className="stat-icon green">
