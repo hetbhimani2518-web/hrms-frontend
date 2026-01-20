@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createHr } from "../../../api/AdminServices/hrService";
@@ -15,17 +16,22 @@ function HrCreate() {
     joiningDate: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await createHr(form);
       navigate("/admin/hr");
     } catch (e) {
       alert(e.response?.data?.message || "Failed to create HR");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,10 +107,9 @@ function HrCreate() {
             onChange={handleChange}
           />
           <input
-            name="department"
-            placeholder="Department"
-            value={form.department}
-            onChange={handleChange}
+            name="department"            
+            value="Human Resources"
+            disabled
           />
           <input
             name="designation"

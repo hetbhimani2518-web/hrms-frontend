@@ -9,9 +9,13 @@ api.interceptors.request.use(
     const auth = localStorage.getItem("auth");
 
     if (auth) {
-      const { accessToken } = JSON.parse(auth);
-      if (accessToken) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
+      try {
+        const { accessToken } = JSON.parse(auth);
+        if (accessToken) {
+          config.headers.Authorization = `Bearer ${accessToken}`;
+        }
+      } catch {
+        localStorage.removeItem("auth");
       }
     }
 

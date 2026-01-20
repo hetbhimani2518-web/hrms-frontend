@@ -1,19 +1,21 @@
 import api from "../axios";
 
-export const createHr = (data) =>
-  api.post("/admin/hr/create", data);
+const BASE = "/admin/hr";
 
-export const getAllHrs = () =>
-  api.get("/admin/hr");
+export const createHr = (data) => 
+  api.post(`${BASE}/create`, data);
 
-export const getHrById = (id) =>
-  api.get(`/admin/hr/get/${id}`);
+export const getAllHrs = () => 
+  api.get(BASE);
 
-export const updateHr = (id, data) =>
-  api.put(`/admin/hr/edit/${id}`, data);
+export const getHrById = (id) => 
+  api.get(`${BASE}/get/${id}`);
 
-export const disableHr = (id) =>
-  api.patch(`/admin/hr/${id}/disable`);
+export const updateHr = (id, data) => 
+  api.put(`${BASE}/edit/${id}`, data);
 
-export const deleteHr = (id) =>
-  api.delete(`/admin/hr/delete/${id}`);
+export const disableHr = (id) => 
+  api.patch(`${BASE}/${id}/disable`);
+
+export const deleteHr = (id) => 
+  api.delete(`${BASE}/delete/${id}`);

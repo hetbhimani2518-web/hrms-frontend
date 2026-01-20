@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createManager } from "../../../api/AdminServices/managerService";
-import "../../../styles/admin.css";
+import "../../../styles/manager.css";
 
 function ManagerCreate() {
   const navigate = useNavigate();

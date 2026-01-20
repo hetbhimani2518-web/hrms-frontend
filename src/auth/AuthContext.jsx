@@ -14,6 +14,11 @@ export const AuthProvider = ({ children }) => {
     }
   });
 
+  const isAuthenticated = !!auth;
+
+  const roles = auth?.roles || [];
+
+
   const login = (data) => {
     setAuth(data);
     localStorage.setItem("auth", JSON.stringify(data));
@@ -24,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("auth");
   };
 
-  const value = { auth, login, logout };
+  const value = { auth, isAuthenticated, roles , login, logout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

@@ -1,49 +1,25 @@
-/* =========================
-   ROOT & GLOBAL
-========================= */
+/* ROOT */
 * {
   box-sizing: border-box;
 }
 
 .admin-layout {
   min-height: 100vh;
-  background: linear-gradient(135deg, #020617, #020617, #0f172a);
+  background: linear-gradient(135deg, #020617, #0f172a);
   color: #e5e7eb;
   font-family: "Inter", system-ui, sans-serif;
 }
 
-/* =========================
-   HEADER (GLASS)
-========================= */
+/* HEADER */
 .admin-header {
   height: 64px;
-  background: rgba(2, 6, 23, 0.7);
-  backdrop-filter: blur(12px);
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 28px;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.admin-header h2 {
-  font-weight: 600;
-  letter-spacing: 0.4px;
-}
-
-.collapse-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: none;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
 }
 
 .logout-btn {
@@ -54,38 +30,24 @@
   color: white;
   cursor: pointer;
   font-weight: 500;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.logout-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35);
-}
-
-/* =========================
-   MAIN LAYOUT
-========================= */
+/* MAIN */
 .admin-main {
   display: flex;
   min-height: calc(100vh - 64px);
 }
 
-/* =========================
-   SIDEBAR (GLASS)
-========================= */
+/* STATIC SIDEBAR */
 .admin-sidebar {
   width: 240px;
-  background: rgba(2, 6, 23, 0.6);
-  backdrop-filter: blur(14px);
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(12px);
   padding: 22px;
   border-right: 1px solid rgba(255, 255, 255, 0.06);
-  transition: width 0.35s ease;
-  overflow-x: hidden;
 }
 
-/* =========================
-   SIDEBAR LINKS
-========================= */
+/* SIDEBAR LINKS */
 .side-link {
   display: flex;
   align-items: center;
@@ -97,12 +59,6 @@
   text-decoration: none;
   margin-bottom: 10px;
   font-size: 15px;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-
-.side-link:hover {
-  background: rgba(37, 99, 235, 0.18);
-  color: white;
 }
 
 .side-link.active {
@@ -115,56 +71,22 @@
   color: white;
 }
 
-/* =========================
-   SIDEBAR ICONS (Lucide)
-========================= */
+/* ICON */
 .link-icon {
   width: 36px;
-  min-width: 36px;
   height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #e5e7eb;
 }
 
-/* =========================
-   COLLAPSED STATE
-========================= */
-.sidebar-collapsed .admin-sidebar {
-  width: 80px;
-}
-
-.sidebar-collapsed .side-link {
-  justify-content: center;
-}
-
-.sidebar-collapsed .link-text {
-  display: none;
-}
-
-/* =========================
-   EXPAND ON HOVER (DESKTOP)
-========================= */
-.admin-sidebar:hover {
-  width: 240px;
-}
-
-.admin-sidebar:hover .link-text {
-  display: inline;
-}
-
-/* =========================
-   CONTENT AREA
-========================= */
+/* CONTENT */
 .admin-content {
   flex: 1;
   padding: 28px;
 }
 
-/* =========================
-   DASHBOARD
-========================= */
+/* DASHBOARD */
 .dashboard h2 {
   font-size: 26px;
   font-weight: 600;
@@ -175,36 +97,25 @@
   margin-bottom: 26px;
 }
 
-/* =========================
-   STATS GRID
-========================= */
+/* STATS GRID */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 22px;
 }
 
-/* =========================
-   STAT CARDS (GLASS)
-========================= */
+/* STAT CARDS */
 .stat-card {
   padding: 22px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .stat-card h4 {
   font-size: 16px;
   font-weight: 500;
-  opacity: 0.9;
 }
 
 .stat-card span {
@@ -213,16 +124,13 @@
   font-weight: 700;
 }
 
-/* Accent borders */
+/* COLORS */
 .stat-card.blue   { box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.4); }
-.stat-card.tyle   { box-shadow: inset 0 0 0 1px rgba(6, 182, 212, 0.4);}
+.stat-card.tyle   { box-shadow: inset 0 0 0 1px rgba(6, 182, 212, 0.4); }
 .stat-card.green  { box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.4); }
 .stat-card.purple { box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.4); }
 .stat-card.orange { box-shadow: inset 0 0 0 1px rgba(234, 88, 12, 0.4); }
 
-/* =========================
-   STAT ICONS
-========================= */
 .stat-icon {
   width: 48px;
   height: 48px;
@@ -240,99 +148,7 @@
 .stat-icon.purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
 .stat-icon.orange { background: linear-gradient(135deg, #ea580c, #f97316); }
 
-/* =========================
-   TABLE (GLASS)
-========================= */
-.hr-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(10px);
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-.hr-table th,
-.hr-table td {
-  padding: 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.hr-table th {
-  background: rgba(255, 255, 255, 0.06);
-  font-weight: 500;
-  text-align: left;
-}
-
-.status.active { color: #22c55e; }
-.status.disabled { color: #ef4444; }
-
-/* =========================
-   BUTTONS
-========================= */
-.primary-btn {
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
-  border: none;
-  padding: 10px 18px;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.primary-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.4);
-}
-
-.actions .danger {
-  background: linear-gradient(135deg, #dc2626, #ef4444);
-  border: none;
-  padding: 6px 12px;
-  border-radius: 8px;
-  color: white;
-}
-
-/* =========================
-   FORMS (GLASS)
-========================= */
-.form-card {
-  max-width: 520px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(14px);
-  padding: 26px;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.form-grid {
-  display: grid;
-  gap: 14px;
-}
-
-.form-grid input {
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  outline: none;
-}
-
-/* =========================
-   MOBILE BEHAVIOR
-========================= */
-@media (max-width: 768px) {
-  .admin-sidebar {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    height: calc(100vh - 64px);
-    z-index: 50;
-  }
-
-  .admin-content {
-    padding-left: 20px;
-  }
+.side-link.active {
+  background: rgba(37, 99, 235, 0.25);
+  border-left: 4px solid #3b82f6;
 }

@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllManagers ,deleteManager,} from "../../../api/AdminServices/managerService";
+import "../../../styles/manager.css";
+
 
 export default function ManagerList() {
   const [managers, setManagers] = useState([]);
