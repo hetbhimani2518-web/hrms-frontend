@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Users,
-  UserCheck,
-  Building2,
-  Settings,
-} from "lucide-react";
+
 import "../../styles/admin.css";
 
 function Counter({ end }) {

@@ -1,11 +1,7 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import api from "../../api/axios";
-import {
-  LayoutDashboard,
-  Users,
-  UserCog,
-} from "lucide-react";
+
 import "../../styles/admin.css";
 
 function AdminLayout() {

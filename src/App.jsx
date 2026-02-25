@@ -18,6 +18,8 @@ import ManagerEdit from "./pages/admin/Edit/ManagerEdit";
 import HrDashboard from "./pages/hr/HrDashboard";
 import ManagerDashboard from "./pages/manager/ManagerDashboard";
 
+
+
 function App() {
   return (
     <BrowserRouter>
