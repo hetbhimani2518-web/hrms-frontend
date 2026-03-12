@@ -24,4 +24,50 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+
+    const originalRequest = error.config;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+
+      originalRequest._retry = true;
+
+      const auth = JSON.parse(localStorage.getItem("auth"));
+
+      if (!auth?.refreshToken) {
+        window.location.href = "/login";
+        return Promise.reject(error);
+      }
+
+      try {
+
+        const res = await api.post("/auth/refresh", {
+          refreshToken: auth.refreshToken,
+        });
+
+        const newAccessToken = res.data.accessToken;
+
+        auth.accessToken = newAccessToken;
+
+        localStorage.setItem("auth", JSON.stringify(auth));
+
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+
+        return api(originalRequest);
+
+      } catch {
+
+        localStorage.removeItem("auth");
+
+        window.location.href = "/login";
+
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export default api;

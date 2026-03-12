@@ -13,8 +13,12 @@ export default function HrList() {
   }, []);
 
   const loadHrs = async () => {
-    const res = await getAllHrs();
-    setHrs(res.data);
+    try {
+      const res = await getAllHrs();
+      setHrs(res.data);
+    } catch {
+      alert("Failed to load HRs");
+    }
   };
 
   const handleDelete = async (id) => {

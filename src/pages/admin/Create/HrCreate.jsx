@@ -106,11 +106,7 @@ function HrCreate() {
             value={form.phone}
             onChange={handleChange}
           />
-          <input
-            name="department"            
-            value="Human Resources"
-            disabled
-          />
+          <input name="department" value="Human Resource" readOnly />
           <input
             name="designation"
             placeholder="Designation"
@@ -124,9 +120,7 @@ function HrCreate() {
             onChange={handleChange}
           />
 
-          <button className="primary-btn">
-            Create HR
-          </button>
+          <button className="primary-btn">Create HR</button>
         </form>
       </div>
     </div>
