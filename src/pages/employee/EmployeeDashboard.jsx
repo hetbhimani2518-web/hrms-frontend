@@ -1,13 +1,17 @@
-import { useAuth } from "../../auth/AuthContext";
-
 function EmployeeDashboard() {
-  const { logout } = useAuth();
 
   return (
-    <div>
-      <h2>Employee Dashboard</h2>
-      <button onClick={logout}>Logout</button>
+
+    <div className="dashboard">
+
+      <h2>Welcome Employee</h2>
+
+      <p>
+        View your profile, leave status and company updates.
+      </p>
+
     </div>
+
   );
 }
 

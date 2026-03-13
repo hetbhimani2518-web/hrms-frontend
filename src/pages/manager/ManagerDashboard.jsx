@@ -1,13 +1,17 @@
-import { useAuth } from "../../auth/AuthContext";
-
 function ManagerDashboard() {
-  const { logout } = useAuth();
 
   return (
-    <div>
-      <h2>Manager Dashboard</h2>
-      <button onClick={logout}>Logout</button>
+
+    <div className="dashboard">
+
+      <h2>Welcome Manager</h2>
+
+      <p>
+        Manage your team and approve leave requests.
+      </p>
+
     </div>
+
   );
 }
 

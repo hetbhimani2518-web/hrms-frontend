@@ -1,12 +1,14 @@
-import { useAuth } from "../../auth/AuthContext";
-
 function HrDashboard() {
-  const { logout } = useAuth();
 
   return (
-    <div>
-      <h2>HR Dashboard</h2>
-      <button onClick={logout}>Logout</button>
+    <div className="dashboard">
+
+      <h2>Welcome HR</h2>
+
+      <p>
+        Manage employees, leaves and HR operations.
+      </p>
+
     </div>
   );
 }

@@ -67,7 +67,7 @@ function AdminDashboard() {
       <h2>Welcome, Admin</h2>
 
       <p className="dashboard-sub">
-        Manage HRs, employees and system settings
+        Manage HRs, Managers and system settings
       </p>
 
       <div className="stats-grid">

@@ -22,6 +22,7 @@ const roleRedirectMap = {
   ROLE_ADMIN: "/admin",
   ROLE_HR: "/hr",
   ROLE_MANAGER: "/manager",
+  ROLE_EMPLOYEE: "/employee",
 };
 
 const HomeRedirect = () => {
