@@ -17,6 +17,9 @@ import ManagerEdit from "./pages/admin/Edit/ManagerEdit";
 import HrLayout from "./pages/hr/HrLayout";
 import HrDashboard from "./pages/hr/HrDashboard";
 import HrLeave from "./pages/hr/HrLeave";
+import EmployeeManagement from "./pages/hr/EmployeeManagement";
+import EmployeeCreate from "./pages/hr/Create/EmployeeCreate";
+import EmployeeEdit from "./pages/hr/Edit/EmployeeEdit";
 
 /* MANAGER */
 import ManagerLayout from "./pages/manager/ManagerLayout";
@@ -70,6 +73,9 @@ function App() {
           <Route index element={<HrDashboard />} />
 
           <Route path="leave" element={<HrLeave />} />
+          <Route path="employee" element={<EmployeeManagement />} />
+          <Route path="employee/create" element={<EmployeeCreate />} />
+          <Route path="employee/edit/:id" element={<EmployeeEdit />} />
         </Route>
 
         {/* MANAGER */}

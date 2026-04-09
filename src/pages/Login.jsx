@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import api from "../api/axios";
+import ThemeToggle from "../theme/ThemeToggle";
 import "../styles/login.css";
 
 function Login() {
@@ -12,7 +13,16 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, auth } = useAuth();
+
+  useEffect(() => {
+    if (auth?.roles) {
+      if (auth.roles.includes("ROLE_ADMIN")) navigate("/admin");
+      else if (auth.roles.includes("ROLE_HR")) navigate("/hr");
+      else if (auth.roles.includes("ROLE_MANAGER")) navigate("/manager");
+      else navigate("/employee");
+    }
+  }, [auth, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -106,6 +116,9 @@ function Login() {
     // </div>
 
     <div className="login-page">
+      <div style={{ position: "absolute", top: "20px", right: "20px", zIndex: 10 }}>
+        <ThemeToggle />
+      </div>
       <div className="login-shell">
         <div className="login-container">
           {/* Left visual section */}

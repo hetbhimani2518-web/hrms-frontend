@@ -4,6 +4,7 @@ import { createContext, useContext, useState } from "react";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
+
   const [auth, setAuth] = useState(() => {
     try {
       const stored = localStorage.getItem("auth");
@@ -15,9 +16,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   const isAuthenticated = !!auth;
-
   const roles = auth?.roles || [];
-
 
   const login = (data) => {
     setAuth(data);
@@ -29,9 +28,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("auth");
   };
 
-  const value = { auth, isAuthenticated, roles , login, logout };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ auth, isAuthenticated, roles, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => useContext(AuthContext);

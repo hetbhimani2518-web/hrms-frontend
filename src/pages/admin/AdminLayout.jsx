@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import api from "../../api/axios";
+import ThemeToggle from "../../theme/ThemeToggle";
 import { LayoutDashboard, UserCog, Users } from "lucide-react";
 import "../../styles/admin.css";
 
@@ -27,9 +28,12 @@ function AdminLayout() {
     <div className="admin-layout">      
       <header className="admin-header">
         <h2>HRMS Admin</h2>
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
+        <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+          <ThemeToggle />
+          <button className="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
       </header>
 
       <div className="admin-main">        

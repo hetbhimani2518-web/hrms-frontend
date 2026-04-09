@@ -14,11 +14,11 @@ export const getEmployeeLeaves = () =>
 export const getManagerLeaves = () =>
   api.get("/manager/leave");
 
-export const approveLeaveByManager = (leaveId, managerId) =>
-  api.patch(`/manager/leave/${leaveId}/approve/${managerId}`);
+export const approveLeaveByManager = (leaveId) =>
+  api.patch(`/manager/leave/${leaveId}/approve`);
 
-export const rejectLeaveByManager = (leaveId, managerId) =>
-  api.patch(`/manager/leave/${leaveId}/reject/${managerId}`);
+export const rejectLeaveByManager = (leaveId) =>
+  api.patch(`/manager/leave/${leaveId}/reject`);
 
 
 /* HR */
@@ -26,8 +26,8 @@ export const rejectLeaveByManager = (leaveId, managerId) =>
 export const getHrLeaves = () =>
   api.get("/hr/leave");
 
-export const approveLeaveByHr = (leaveId, hrId) =>
-  api.patch(`/hr/leave/${leaveId}/approve/${hrId}`);
+export const approveLeaveByHr = (leaveId) =>
+  api.patch(`/hr/leave/${leaveId}/approve`);
 
-export const rejectLeaveByHr = (leaveId, hrId) =>
-  api.patch(`/hr/leave/${leaveId}/reject/${hrId}`);
+export const rejectLeaveByHr = (leaveId) =>
+  api.patch(`/hr/leave/${leaveId}/reject`);

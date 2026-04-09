@@ -10,8 +10,6 @@ function HrLeave() {
 
   const [leaves, setLeaves] = useState([]);
 
-  const hrId = 1;
-
   useEffect(() => {
     loadLeaves();
   }, []);
@@ -22,12 +20,12 @@ function HrLeave() {
   };
 
   const approve = async (id) => {
-    await approveLeaveByHr(id, hrId);
+    await approveLeaveByHr(id);
     loadLeaves();
   };
 
   const reject = async (id) => {
-    await rejectLeaveByHr(id, hrId);
+    await rejectLeaveByHr(id);
     loadLeaves();
   };
 

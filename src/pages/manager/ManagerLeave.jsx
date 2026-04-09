@@ -10,8 +10,6 @@ function ManagerLeave() {
 
   const [leaves, setLeaves] = useState([]);
 
-  const managerId = 1;
-
   useEffect(() => {
     loadLeaves();
   }, []);
@@ -22,12 +20,12 @@ function ManagerLeave() {
   };
 
   const approve = async (id) => {
-    await approveLeaveByManager(id, managerId);
+    await approveLeaveByManager(id);
     loadLeaves();
   };
 
   const reject = async (id) => {
-    await rejectLeaveByManager(id, managerId);
+    await rejectLeaveByManager(id);
     loadLeaves();
   };
 
