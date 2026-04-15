@@ -58,7 +58,7 @@
 .table-wrapper {
   margin-top: 10px;
   border-radius: 14px;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid rgba(55, 65, 81, 0.9);
   background: radial-gradient(
     circle at top,

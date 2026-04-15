@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createManager } from "../../../api/AdminServices/managerService";
 import "../../../styles/manager.css";
+import { useToast } from "../../../components/ToastContext";
 
 function ManagerCreate() {
   const navigate = useNavigate();
+  const { addToast } = useToast();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -23,9 +25,10 @@ function ManagerCreate() {
     e.preventDefault();
     try {
       await createManager(form);
+      addToast("Manager account created successfully!", "success");
       navigate("/admin/manager");
     } catch (e) {
-      alert(e.response?.data?.message || "Failed to create Manager");
+      addToast(e.response?.data?.message || "Failed to create Manager", "error");
     }
   };
 

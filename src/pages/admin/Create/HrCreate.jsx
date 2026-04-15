@@ -1,11 +1,12 @@
-/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createHr } from "../../../api/AdminServices/hrService";
 import "../../../styles/hr.css";
+import { useToast } from "../../../components/ToastContext";
 
 function HrCreate() {
   const navigate = useNavigate();
+  const { addToast } = useToast();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -27,9 +28,10 @@ function HrCreate() {
     setLoading(true);
     try {
       await createHr(form);
+      addToast("HR account created successfully!", "success");
       navigate("/admin/hr");
     } catch (e) {
-      alert(e.response?.data?.message || "Failed to create HR");
+      addToast(e.response?.data?.message || "Failed to create HR", "error");
     } finally {
       setLoading(false);
     }

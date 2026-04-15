@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getEmployeeById, updateEmployee } from "../../../api/HrServices/employeeService";
 import "../../../styles/hr.css";
+import { useToast } from "../../../components/ToastContext";
 
 function EmployeeEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToast } = useToast();
 
   const [form, setForm] = useState({
     fullName: "",
@@ -41,9 +43,10 @@ function EmployeeEdit() {
     setLoading(true);
     try {
       await updateEmployee(id, form);
-      navigate("/hr"); // or /hr/employee
+      addToast("Employee updated successfully!", "success");
+      navigate("/hr/employee"); 
     } catch (e) {
-      alert(e.response?.data?.message || "Failed to update Employee");
+      addToast(e.response?.data?.message || "Failed to update Employee", "error");
     } finally {
       setLoading(false);
     }

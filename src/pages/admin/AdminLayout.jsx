@@ -2,12 +2,15 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import api from "../../api/axios";
 import ThemeToggle from "../../theme/ThemeToggle";
+import NotificationBell from "../../components/NotificationBell";
 import { LayoutDashboard, UserCog, Users } from "lucide-react";
+import { useToast } from "../../components/ToastContext";
 import "../../styles/admin.css";
 
 function AdminLayout() {
   const { auth, logout } = useAuth();
   const navigate = useNavigate();
+  const { addToast } = useToast();
 
   const handleLogout = async () => {
     try {
@@ -20,6 +23,7 @@ function AdminLayout() {
       console.error("Logout failed", e);
     } finally {
       logout();
+      addToast("Logged out successfully", "info");
       navigate("/login");
     }
   };
@@ -29,6 +33,7 @@ function AdminLayout() {
       <header className="admin-header">
         <h2>HRMS Admin</h2>
         <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+          <NotificationBell />
           <ThemeToggle />
           <button className="logout-btn" onClick={handleLogout}>
             Logout

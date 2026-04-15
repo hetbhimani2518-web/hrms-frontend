@@ -3,7 +3,7 @@ import api from "../axios";
 /* EMPLOYEE */
 
 export const applyLeave = (data) =>
-  api.post("/employee/leave/apply", data);
+  api.post("/employee/leave", data);
 
 export const getEmployeeLeaves = () =>
   api.get("/employee/leave");

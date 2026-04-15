@@ -1,5 +1,8 @@
 import api from "./axios";
 
+export const getAdminDashboardStats = () =>
+  api.get("/admin/dashboard/stats");
+
 export const getEmployeeDashboardStats = () =>
   api.get("/employee/dashboard/stats");
 

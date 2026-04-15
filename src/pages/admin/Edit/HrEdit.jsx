@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getHrById, updateHr } from "../../../api/AdminServices/hrService";
 import "../../../styles/hr.css";
+import { useToast } from "../../../components/ToastContext";
 
 
 export default function HrEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToast } = useToast();
 
   const [form, setForm] = useState({
     email: "",
@@ -32,8 +34,13 @@ export default function HrEdit() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateHr(id, form);
-    navigate("/admin/hr");
+    try {
+      await updateHr(id, form);
+      addToast("HR updated successfully!", "success");
+      navigate("/admin/hr");
+    } catch (err) {
+      addToast("Failed to update HR", "error");
+    }
   };
 
   return (
@@ -80,6 +87,7 @@ export default function HrEdit() {
             placeholder="Department"
             value={form.department}
             onChange={handleChange}
+            readOnly
           />
           <input
             name="designation"

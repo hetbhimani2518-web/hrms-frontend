@@ -196,11 +196,8 @@ body {
   box-shadow:
     0 0 0 1px rgba(37, 99, 235, 0.7),
     0 0 0 8px var(--accent-soft);
-  background: linear-gradient(
-    135deg,
-    rgba(15, 23, 42, 0.9),
-    rgba(15, 23, 42, 0.6)
-  );
+  background: var(--login-focus-bg);
+  backdrop-filter: blur(12px);
 }
 
 /* Password text toggle */

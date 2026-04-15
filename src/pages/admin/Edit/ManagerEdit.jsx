@@ -6,10 +6,12 @@ import {
   updateManager,
 } from "../../../api/AdminServices/managerService";
 import "../../../styles/manager.css";
+import { useToast } from "../../../components/ToastContext";
 
 export default function ManagerEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToast } = useToast();
 
   const [form, setForm] = useState({
     email: "",
@@ -34,8 +36,13 @@ export default function ManagerEdit() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateManager(id, form);
-    navigate("/admin/manager");
+    try {
+      await updateManager(id, form);
+      addToast("Manager updated successfully!", "success");
+      navigate("/admin/manager");
+    } catch (err) {
+      addToast("Failed to update Manager", "error");
+    }
   };
 
   return (

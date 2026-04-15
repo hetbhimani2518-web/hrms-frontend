@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createEmployee } from "../../../api/HrServices/employeeService";
 import "../../../styles/hr.css";
+import { useToast } from "../../../components/ToastContext";
 
 function EmployeeCreate() {
   const navigate = useNavigate();
+  const { addToast } = useToast();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -26,9 +28,10 @@ function EmployeeCreate() {
     setLoading(true);
     try {
       await createEmployee(form);
-      navigate("/hr"); // or "/hr/employee" if nested routing is set
+      addToast("Employee created successfully!", "success");
+      navigate("/hr/employee"); 
     } catch (e) {
-      alert(e.response?.data?.message || "Failed to create Employee");
+      addToast(e.response?.data?.message || "Failed to create Employee", "error");
     } finally {
       setLoading(false);
     }

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Users, UserCheck, Building2, Settings } from "lucide-react";
 import "../../styles/admin.css";
-import { getAdminDashboardStats } from "../../api/AdminServices/dashboardService";
+import { getAdminDashboardStats } from "../../api/dashboardService";
 
 /* Animated Counter */
 function Counter({ end }) {
@@ -42,6 +42,7 @@ function AdminDashboard() {
   const [stats, setStats] = useState({
     totalHrs: 0,
     totalManagers: 0,
+    totalEmployees: 0,
     activeEmployees: 0
   });
 
@@ -86,6 +87,14 @@ function AdminDashboard() {
           </div>
           <h4>Total Managers</h4>
           <Counter end={stats.totalManagers} />
+        </div>
+
+        <div className="stat-card purple">
+          <div className="stat-icon purple">
+            <Users size={22} />
+          </div>
+          <h4>Total Employees</h4>
+          <Counter end={stats.totalEmployees} />
         </div>
 
         <div className="stat-card green">

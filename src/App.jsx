@@ -1,7 +1,9 @@
+import React from 'react';
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Login from "./pages/Login";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import HomeRedirect from "./routes/HomeRedirect";
+import { ToastProvider } from "./components/ToastContext";
 
 /* ADMIN */
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -34,80 +36,72 @@ import EmployeeLeave from "./pages/employee/EmployeeLeave";
 function App() {
   return (
     <BrowserRouter>
+      <ToastProvider>
+        <Routes>
+          <Route path="/" element={<HomeRedirect />} />
+          <Route path="/login" element={<Login />} />
 
-      <Routes>
+          {/* ADMIN */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<AdminDashboard />} />
+            <Route path="hr" element={<HrManagement />} />
+            <Route path="hr/create" element={<HrCreate />} />
+            <Route path="hr/edit/:id" element={<HrEdit />} />
+            <Route path="manager" element={<ManagerManagement />} />
+            <Route path="manager/create" element={<ManagerCreate />} />
+            <Route path="manager/edit/:id" element={<ManagerEdit />} />
+          </Route>
 
-        <Route path="/" element={<HomeRedirect />} />
+          {/* HR */}
+          <Route
+            path="/hr"
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_HR"]}>
+                <HrLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<HrDashboard />} />
+            <Route path="leave" element={<HrLeave />} />
+            <Route path="employee" element={<EmployeeManagement />} />
+            <Route path="employee/create" element={<EmployeeCreate />} />
+            <Route path="employee/edit/:id" element={<EmployeeEdit />} />
+          </Route>
 
-        <Route path="/login" element={<Login />} />
+          {/* MANAGER */}
+          <Route
+            path="/manager"
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_MANAGER"]}>
+                <ManagerLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<ManagerDashboard />} />
+            <Route path="leave" element={<ManagerLeave />} />
+          </Route>
 
-        {/* ADMIN */}
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
-              <AdminLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<AdminDashboard />} />
-
-          <Route path="hr" element={<HrManagement />} />
-          <Route path="hr/create" element={<HrCreate />} />
-          <Route path="hr/edit/:id" element={<HrEdit />} />
-
-          <Route path="manager" element={<ManagerManagement />} />
-          <Route path="manager/create" element={<ManagerCreate />} />
-          <Route path="manager/edit/:id" element={<ManagerEdit />} />
-        </Route>
-
-        {/* HR */}
-        <Route
-          path="/hr"
-          element={
-            <ProtectedRoute allowedRoles={["ROLE_HR"]}>
-              <HrLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<HrDashboard />} />
-
-          <Route path="leave" element={<HrLeave />} />
-          <Route path="employee" element={<EmployeeManagement />} />
-          <Route path="employee/create" element={<EmployeeCreate />} />
-          <Route path="employee/edit/:id" element={<EmployeeEdit />} />
-        </Route>
-
-        {/* MANAGER */}
-        <Route
-          path="/manager"
-          element={
-            <ProtectedRoute allowedRoles={["ROLE_MANAGER"]}>
-              <ManagerLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<ManagerDashboard />} />
-
-          <Route path="leave" element={<ManagerLeave />} />
-        </Route>
-
-        {/* EMPLOYEE */}
-        <Route
-          path="/employee"
-          element={
-            <ProtectedRoute allowedRoles={["ROLE_EMPLOYEE"]}>
-              <EmployeeLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<EmployeeDashboard />} />
-
-          <Route path="leave" element={<EmployeeLeave />} />
-        </Route>
-
-      </Routes>
-
+          {/* EMPLOYEE */}
+          <Route
+            path="/employee"
+            element={
+              <ProtectedRoute allowedRoles={["ROLE_EMPLOYEE"]}>
+                <EmployeeLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<EmployeeDashboard />} />
+            <Route path="leave" element={<EmployeeLeave />} />
+          </Route>
+        </Routes>
+      </ToastProvider>
     </BrowserRouter>
   );
 }

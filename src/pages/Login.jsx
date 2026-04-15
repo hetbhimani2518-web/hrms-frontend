@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import api from "../api/axios";
 import ThemeToggle from "../theme/ThemeToggle";
+import { useToast } from "../components/ToastContext";
 import "../styles/login.css";
 
 function Login() {
@@ -14,6 +15,7 @@ function Login() {
 
   const navigate = useNavigate();
   const { login, auth } = useAuth();
+  const { addToast } = useToast();
 
   useEffect(() => {
     if (auth?.roles) {
@@ -36,6 +38,7 @@ function Login() {
       });
 
       login(res.data);
+      addToast(`Welcome back, ${res.data.fullName}!`, "success");
 
       if (res.data.roles.includes("ROLE_ADMIN")) {
         navigate("/admin");

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { applyLeave, getEmployeeLeaves } from "../../api/LeaveServices/leaveService";
 import "../../styles/hr.css"; 
+import { useToast } from "../../components/ToastContext"; 
 
 function EmployeeLeave() {
   const [leaves, setLeaves] = useState([]);
@@ -14,6 +15,7 @@ function EmployeeLeave() {
     endDate: "",
     reason: ""
   });
+  const { addToast } = useToast();
 
   useEffect(() => {
     loadLeaves();
@@ -41,7 +43,8 @@ function EmployeeLeave() {
         endDate: "",
         reason: ""
       });
-      loadLeaves();
+        addToast("Leave request successfully submitted!", "success");
+        loadLeaves();
     } catch (err) {
       setError(err.response?.data?.message || err.response?.data || "Application failed. Ensure dates are strictly valid.");
     } finally {
@@ -50,8 +53,10 @@ function EmployeeLeave() {
   };
 
   return (
-    <div className="hr-page" style={{ flexDirection: 'column', gap: '30px', display: 'flex', paddingBottom: '40px' }}>
+    <div className="hr-page" style={{ flexDirection: 'column', gap: '30px', display: 'flex', paddingBottom: '40px', position: 'relative' }}>
       
+
+
       {/* Leave Application Form Card */}
       <div className="hr-card" style={{ maxWidth: '850px', margin: '0' }}>
         <div className="hr-header">
@@ -69,12 +74,13 @@ function EmployeeLeave() {
                 value={form.leaveType}
                 onChange={(e) => setForm({ ...form, leaveType: e.target.value })}
                 required
-                style={{ width: '100%', padding: '12px', borderRadius: '10px' }}
+                style={{ width: '100%', padding: '12px', borderRadius: '10px', background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)', color: 'var(--text-main)', border: '1px solid var(--border-color)' }}
               >
                 <option value="SICK">Sick Leave</option>
                 <option value="CASUAL">Casual Leave</option>
                 <option value="ANNUAL">Annual Leave</option>
-                <option value="UNPAID">Unpaid Leave</option>
+                <option value="MATERNITY">Maternity Leave</option>
+                <option value="PATERNITY">Paternity Leave</option>
               </select>
             </div>
 
@@ -156,6 +162,7 @@ function EmployeeLeave() {
                 <th>End Date</th>
                 <th>Reason</th>
                 <th>Status Track</th>
+                <th style={{ width: '50px' }}></th>
               </tr>
             </thead>
             <tbody>
@@ -179,11 +186,35 @@ function EmployeeLeave() {
                       {l.status}
                     </span>
                   </td>
+                  <td>
+                    <div className="info-icon-wrapper">
+                      ℹ️
+                      <div className="info-popup">
+                        <strong style={{ display: 'block', marginBottom: '8px', borderBottom: '1px solid var(--border-color)', paddingBottom: '4px', color: 'var(--accent)' }}>Approval Audit</strong>
+                        {l.managerName ? (
+                          <p style={{ margin: '4px 0' }}>
+                            <strong>Manager ({l.managerName}): </strong> <br/>
+                            <span style={{ color: 'var(--text-muted)' }}>{l.managerApprovedAt ? new Date(l.managerApprovedAt).toLocaleString() : 'N/A'}</span>
+                          </p>
+                        ) : (
+                          <p style={{ margin: '4px 0', color: 'var(--text-muted)' }}>No Manager Interaction yet.</p>
+                        )}
+                        {l.hrName ? (
+                          <p style={{ margin: '12px 0 4px' }}>
+                            <strong>HR ({l.hrName}): </strong> <br/>
+                            <span style={{ color: 'var(--text-muted)' }}>{l.hrApprovedAt ? new Date(l.hrApprovedAt).toLocaleString() : 'N/A'}</span>
+                          </p>
+                        ) : (
+                          <p style={{ margin: '12px 0 4px', color: 'var(--text-muted)' }}>No HR Interaction yet.</p>
+                        )}
+                      </div>
+                    </div>
+                  </td>
                 </tr>
               ))}
               {leaves.length === 0 && (
                 <tr>
-                  <td colSpan="5" className="empty-row" style={{ padding: '30px' }}>No leave application records found. Take a break!</td>
+                  <td colSpan="6" className="empty-row" style={{ padding: '30px' }}>No leave application records found. Take a break!</td>
                 </tr>
               )}
             </tbody>
